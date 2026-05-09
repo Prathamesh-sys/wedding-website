@@ -36,12 +36,8 @@ export const weddingData = {
     ]
   },
   gallery: [
-    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1583939000240-690e168d327f?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80"
+    "/images/moments/moment1.jpg",
+    "/images/moments/moment2.jpg"
   ],
   venue: {
     name: "Gojrai Palace",
