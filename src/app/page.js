@@ -18,6 +18,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [playMusic, setPlayMusic] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -28,8 +29,24 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleStartMusic = () => {
+  useEffect(() => {
+    if (mounted) {
+      if (!isOpened) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
+    }
+    return () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "auto";
+      }
+    };
+  }, [isOpened, mounted]);
+
+  const handleOpen = () => {
     setPlayMusic(true);
+    setIsOpened(true);
   };
 
   if (!mounted) return <div className="bg-stone-950 min-h-screen" />;
@@ -40,23 +57,30 @@ export default function Home() {
         {loading ? (
           <LoadingScreen key="loader" />
         ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Hero onStartMusic={handleStartMusic} />
-            <CoupleStory />
-            <Countdown />
-            <EventSchedule />
-            <FamilyDetails />
-            <PhotoGallery />
-            <Venue />
-            <RSVP />
-            <Footer />
+          <div key="content">
+            <Hero onOpen={handleOpen} isOpened={isOpened} />
+            
+            <AnimatePresence>
+              {isOpened && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                >
+                  <CoupleStory />
+                  <Countdown />
+                  <EventSchedule />
+                  <FamilyDetails />
+                  <PhotoGallery />
+                  <Venue />
+                  <RSVP />
+                  <Footer />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
             <AudioPlayer playSignal={playMusic} />
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </main>

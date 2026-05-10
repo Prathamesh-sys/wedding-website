@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { weddingData } from "@/data/weddingData";
 
-export default function Hero({ onStartMusic }) {
+export default function Hero({ onOpen, isOpened }) {
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState([]);
 
@@ -21,8 +21,13 @@ export default function Hero({ onStartMusic }) {
   }, []);
 
   const handleOpenInvitation = () => {
-    onStartMusic?.();
-    document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
+    onOpen?.();
+    setTimeout(() => {
+      const storySection = document.getElementById('story');
+      if (storySection) {
+        storySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
@@ -55,35 +60,53 @@ export default function Hero({ onStartMusic }) {
           {weddingData.brideName} <br className="md:hidden" /> & <br className="md:hidden" /> {weddingData.groomName}
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="flex flex-col items-center gap-4"
-        >
-          <p className="font-serif text-xl md:text-3xl text-white/90">
-            {weddingData.weddingDate}
-          </p>
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-4" />
-          
-          <motion.p
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 1, delay: 1.5 }}
-             className="text-stone-300 italic mb-4 font-serif"
-          >
-            {weddingData.openingMessage}
-          </motion.p>
+        <AnimatePresence>
+          {!isOpened && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 1, delay: 1 }}
+              className="flex flex-col items-center gap-4"
+            >
+              <p className="font-serif text-xl md:text-3xl text-white/90">
+                {weddingData.weddingDate}
+              </p>
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-4" />
+              
+              <motion.p
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 transition={{ duration: 1, delay: 1.5 }}
+                 className="text-stone-300 italic mb-4 font-serif"
+              >
+                {weddingData.openingMessage}
+              </motion.p>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleOpenInvitation}
-            className="px-8 py-3 rounded-full border border-gold-400/50 bg-black/30 backdrop-blur-md text-gold-300 hover:bg-gold-400 hover:text-black transition-all font-sans tracking-widest text-sm uppercase"
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleOpenInvitation}
+                className="px-8 py-3 rounded-full border border-gold-400/50 bg-black/30 backdrop-blur-md text-gold-300 hover:bg-gold-400 hover:text-black transition-all font-sans tracking-widest text-sm uppercase"
+              >
+                Open Invitation
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {isOpened && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="flex flex-col items-center gap-4"
           >
-            Open Invitation
-          </motion.button>
-        </motion.div>
+             <p className="font-serif text-xl md:text-3xl text-white/90">
+              {weddingData.weddingDate}
+            </p>
+          </motion.div>
+        )}
       </div>
 
       {mounted && (

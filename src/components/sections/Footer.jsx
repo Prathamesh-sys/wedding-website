@@ -44,9 +44,25 @@ export default function Footer() {
           {weddingData.brideName} & {weddingData.groomName}
         </div>
 
-        <div className="pt-12 border-t border-white/5 text-stone-500 text-[10px] tracking-widest uppercase">
+        <div className="pt-12 border-t border-white/5 text-stone-500 text-[10px] tracking-widest uppercase mb-8">
           Designed for a Lifetime of Happiness
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+          className="flex flex-col items-center group"
+        >
+          <div className="h-px w-8 bg-gradient-to-r from-transparent via-gold-500/20 to-transparent mb-6" />
+          <p className="font-sans text-[11px] tracking-[0.4em] text-stone-400 uppercase mb-2">
+            Crafted with <span className="text-red-500/60 group-hover:text-red-500 transition-colors duration-500">❤️</span> by
+          </p>
+          <h3 className="font-serif text-lg text-gold-200/80 tracking-wide hover:text-gold-300 transition-all duration-700 cursor-default relative">
+            Prathamesh Gaikwad
+            <div className="absolute -inset-x-4 -inset-y-2 bg-gold-400/0 group-hover:bg-gold-400/5 blur-xl transition-all duration-1000 rounded-full" />
+          </h3>
+        </motion.div>
       </div>
 
       {/* Decorative floating hearts */}
