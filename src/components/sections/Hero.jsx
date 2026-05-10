@@ -31,7 +31,7 @@ export default function Hero({ onOpen, isOpened }) {
   };
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] w-full flex flex-col items-center overflow-hidden pt-safe pb-safe">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-stone-950 z-10" />
         <img
@@ -41,12 +41,12 @@ export default function Hero({ onOpen, isOpened }) {
         />
       </div>
 
-      <div className="z-20 text-center flex flex-col items-center px-4">
+      <div className="z-20 text-center flex flex-col items-center justify-center flex-grow px-4 w-full">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-gold-300 font-sans tracking-[0.2em] uppercase text-sm md:text-base mb-6"
+          className="text-gold-300 font-sans tracking-[0.2em] uppercase text-sm md:text-base mb-4 md:mb-6"
         >
           {weddingData.heroSubtitle}
         </motion.p>
@@ -55,10 +55,13 @@ export default function Hero({ onOpen, isOpened }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="font-cursive text-7xl md:text-9xl text-gold-gradient mb-8 leading-tight"
+          className="font-cursive text-6xl md:text-9xl text-gold-gradient mb-4 md:mb-8 leading-tight"
         >
           {weddingData.brideName} <br className="md:hidden" /> & <br className="md:hidden" /> {weddingData.groomName}
         </motion.h1>
+      </div>
+
+      <div className="z-20 w-full px-4 pb-8 md:pb-12 mt-auto">
 
         <AnimatePresence>
           {!isOpened && (
