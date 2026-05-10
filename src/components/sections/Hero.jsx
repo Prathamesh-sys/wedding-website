@@ -72,16 +72,16 @@ export default function Hero({ onOpen, isOpened }) {
               transition={{ duration: 1, delay: 1 }}
               className="flex flex-col items-center gap-4"
             >
-              <p className="font-serif text-xl md:text-3xl text-white/90">
+              <p className="font-serif text-xl md:text-3xl text-white/90 text-center">
                 {weddingData.weddingDate}
               </p>
-              <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-4" />
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
               
               <motion.p
                  initial={{ opacity: 0 }}
                  animate={{ opacity: 1 }}
                  transition={{ duration: 1, delay: 1.5 }}
-                 className="text-stone-300 italic mb-4 font-serif"
+                 className="text-stone-300 italic mb-6 font-serif text-center w-full max-w-sm px-4"
               >
                 {weddingData.openingMessage}
               </motion.p>
